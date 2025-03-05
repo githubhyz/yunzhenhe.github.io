@@ -16,25 +16,9 @@ I am a **PhD student at Kyoto University**, pursuing research in **Large Languag
 
 ## Papers
 
-### 🔹 Large Language Model Hallucination Mitigation
-**Title:** Linear Regression Approach for Word Logits in Large Language Models  
-**Summary:** My research focuses on mitigating hallucinations in large language models by applying **word logit linear regression** techniques.  
-**Publication:** [ARR 2024 (Under Review)](https://arxiv.org/your-paper)  
-
-### 🔹 Sparse Autoencoder for Feature Compression
-Developing methods to **reduce feature costs** in Sparse Autoencoder (SAE) by computing **cosine similarity and KL divergence** across different layers.
-
 ---
 
 ## Awards & 
-
-### 🔸 [How to Reduce Hallucinations in LLMs](blog/hallucination-mitigation.md)
-**Date:** February 2025  
-A deep dive into techniques for controlling hallucinations in large language models.
-
-### 🔸 [Optimizing Sparse Autoencoders](blog/sparse-autoencoders.md)
-**Date:** January 2025  
-A technical discussion on weight regularization in SAE.
 
 ---
 
