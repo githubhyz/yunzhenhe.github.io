@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Yunzhen He</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --font-body: "IBM Plex Sans", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    --font-display: "IBM Plex Sans", system-ui, sans-serif;
+    --bg: #fdfdfc;
+    --fg: #16140f;
+    --muted: #6b675e;
+    --faint: #b6b1a6;
+    --rule: #e7e3da;
+    --accent: oklch(0.55 0.13 35);
+    --accent-soft: oklch(0.96 0.02 35);
+    --content-w: 720px;
+    --gutter: 28px;
+    --row-pad: 18px;
+    --line: 1.55;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    color: var(--fg);
+    background: var(--bg);
+    font-size: 15.5px;
+    line-height: var(--line);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+  }
+  a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--faint); transition: color .15s, border-color .15s; }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .mono { font-family: var(--font-mono); font-size: 0.85em; letter-spacing: -0.01em; }
+  .container {
+    max-width: var(--content-w);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  /* === Header === */
+  header.site {
+    padding: 96px 0 0;
+  }
+  header.site .nameline {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  header.site h1 {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.1;
+  }
+  header.site .han {
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 8px;
+    font-size: 0.9em;
+  }
+  header.site .meta {
+    color: var(--muted);
+    font-size: 13px;
+  }
+  header.site .lede {
+    margin: 28px 0 0;
+    color: var(--fg);
+    max-width: 60ch;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  header.site .lede em {
+    font-style: normal;
+    background: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+    padding: 0 2px;
+  }
+  header.site .links {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    color: var(--muted);
+    font-size: 13.5px;
+  }
+  header.site .links a {
+    border-bottom: none;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  header.site .links a::before {
+    content: "";
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--faint);
+    transition: background .15s;
+  }
+  header.site .links a:hover { color: var(--accent); }
+  header.site .links a:hover::before { background: var(--accent); }
+
+  /* === Section === */
+  section.block {
+    padding: 56px 0 0;
+  }
+  section.block > .container > h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  section.block > .container > h2 .count {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--faint);
+    letter-spacing: 0;
+  }
+  /* About */
+  .about p {
+    margin: 0 0 14px;
+    max-width: 62ch;
+    color: var(--fg);
+  }
+  .about p.muted { color: var(--muted); }
+
+  /* Interests */
+  .interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg);
+    background: transparent;
+    border: 1px solid var(--rule);
+    padding: 6px 11px;
+    border-radius: 999px;
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .chip .star { color: var(--accent); margin-right: 4px; }
+
+  /* Pubs */
+  .pub-list { display: flex; flex-direction: column; }
+  .pub {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 20px;
+    padding: var(--row-pad) 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .pub:last-child { border-bottom: none; }
+  .pub .yr {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0;
+    padding-top: 3px;
+  }
+  .pub .body { min-width: 0; }
+  .pub .title {
+    font-weight: 500;
+    color: var(--fg);
+    line-height: 1.4;
+    margin: 0 0 6px;
+    font-size: 15.5px;
+  }
+  .pub .authors {
+    color: var(--muted);
+    font-size: 13.5px;
+    margin: 0 0 6px;
+    line-height: 1.5;
+  }
+  .pub .authors .me { color: var(--fg); font-weight: 500; border-bottom: 1px dotted var(--faint); }
+  .pub .venue {
+    color: var(--muted);
+    font-size: 13px;
+    font-style: italic;
+  }
+  .pub .venue .badge {
+    display: inline-block;
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--rule);
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-left: 8px;
+    color: var(--muted);
+    vertical-align: 1px;
+  }
+  .pub .venue .badge.award {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .pub .actions {
+    display: flex;
+    gap: 14px;
+    align-self: start;
+    padding-top: 4px;
+  }
+  .pub .actions a {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border-bottom: none;
+  }
+  .pub .actions a:hover { color: var(--accent); }
+
+  /* Edu / Exp shared timeline */
+  .timeline { display: flex; flex-direction: column; }
+  .row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .when {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+  .row .what .role {
+    font-weight: 500;
+    margin: 0 0 2px;
+  }
+  .row .what .where {
+    color: var(--muted);
+    font-size: 13.5px;
+  }
+  .row .what .note {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .row .what .note .accent { color: var(--accent); }
+
+  /* Awards */
+  .awards .row .what .role { font-weight: 500; }
+  .awards .row .what .org {
+    color: var(--muted); font-size: 13px;
+  }
+
+  /* Footer */
+  footer.site {
+    margin-top: 96px;
+    padding: 28px 0 64px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer.site a { color: var(--muted); border-bottom: none; }
+  footer.site a:hover { color: var(--accent); }
+
+  /* Density variants */
+  body.density-comfortable { --row-pad: 22px; --line: 1.65; }
+  body.density-compact { --row-pad: 12px; --line: 1.45; }
+
+  /* Layout variants */
+  body.layout-wide { --content-w: 880px; }
+  body.layout-narrow { --content-w: 620px; }
+
+  /* Numbered pubs */
+  body.pubs-numbered .pub .yr::before {
+    content: "[" attr(data-n) "] ";
+    color: var(--faint);
+  }
+
+  @media (max-width: 640px) {
+    :root { --gutter: 22px; }
+    header.site { padding-top: 64px; }
+    header.site h1 { font-size: 26px; }
+    .pub { grid-template-columns: 48px 1fr; }
+    .pub .actions { grid-column: 2; padding-top: 8px; }
+    .row { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+</head>
+<body data-screen-label="01 Home">
+
+
+<header class="site">
+  <div class="container">
+    <div class="nameline">
+      <h1>Yunzhen He<span class="han">何 昀臻 · カ ユンチェン</span></h1>
+      <div class="meta mono">Kyoto, Japan · updated <span id="updated">Apr 2026</span></div>
+    </div>
+    <p class="lede">
+      Ph.D. student at <a href="https://www.i.kyoto-u.ac.jp/en/" target="_blank" rel="noopener">Kyoto University</a>, Graduate School of Informatics, advised by Hidetoshi Shimodaira. I work on <em>large language models</em> — hallucination, decoding, post-training, and alignment.
+    </p>
+    <div class="links">
+      <a href="mailto:heyunzhenwhat@gmail.com">heyunzhenwhat@gmail.com</a>
+      <a href="https://github.com/githubhyz" target="_blank" rel="noopener">github.com/githubhyz</a>
+      <a href="https://scholar.google.co.jp/citations?user=Fhb4RNoAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+      <a href="cv.pdf" target="_blank">CV (PDF)</a>
+    </div>
+  </div>
+</header>
+
+<section class="block about" id="about" data-screen-label="About">
+  <div class="container">
+    <h2>About</h2>
+    <p>I'm a first-year Ph.D. student in the Data Science Course at Kyoto University, supported by the <span class="mono">DoGS Fellowship</span> (2025–2028). Before that I completed my Master's in the same group, and my Bachelor's at Chuo University in Tokyo.</p>
+    <p class="muted">I've also spent time as an LLM R&amp;D intern at Spiral AI and on Rakuten's AI Architecture team. My research has been recognized with a Sponsor Award at ANLP 2024.</p>
+  </div>
+</section>
+
+<section class="block" id="interests" data-screen-label="Research interests">
+  <div class="container">
+    <h2>Research interests</h2>
+    <div class="interests">
+      <span class="chip"><span class="star">✦</span>LLM hallucinations</span>
+      <span class="chip">Generation &amp; decoding</span>
+      <span class="chip">Diffusion LLMs</span>
+      <span class="chip">Post-training</span>
+      <span class="chip">Alignment</span>
+      <span class="chip">Agentic RL</span>
+      <span class="chip">Benchmarks</span>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="publications" data-screen-label="Publications">
+  <div class="container">
+    <h2>Publications <span class="count">3 papers</span></h2>
+    <div class="pub-list" id="pub-list">
+
+      <article class="pub" data-n="3">
+        <div class="yr">2025</div>
+        <div class="body">
+          <h3 class="title">DeLTa: A Decoding Strategy based on Logit Trajectory Prediction Improves Factuality and Reasoning Ability</h3>
+          <p class="authors"><span class="me">Yunzhen He</span>, Yusuke Takase, Yoichi Ishibashi, Hidetoshi Shimodaira</p>
+          <p class="venue">Second Workshop on Uncertainty-Aware NLP, EMNLP 2025</p>
+        </div>
+        <div class="actions">
+          <a href="#" aria-label="paper">paper</a>
+          <a href="#" aria-label="bibtex">bib</a>
+        </div>
+      </article>
+
+      <article class="pub" data-n="2">
+        <div class="yr">2024</div>
+        <div class="body">
+          <h3 class="title">Shimo Lab at "Discharge Me!": Discharge Summarization by Prompt-Driven Concatenation of Electronic Health Record Sections</h3>
+          <p class="authors"><span class="me">Yunzhen He</span>, Hiroaki Yamagiwa, Hidetoshi Shimodaira</p>
+          <p class="venue">23rd Workshop on Biomedical NLP, ACL 2024</p>
+        </div>
+        <div class="actions">
+          <a href="#">paper</a>
+          <a href="#">bib</a>
+        </div>
+      </article>
+
+      <article class="pub" data-n="1">
+        <div class="yr">2024</div>
+        <div class="body">
+          <h3 class="title">大規模言語モデルにおける幻覚緩和のための単語確率の外挿 <span class="mono" style="color:var(--muted); font-size:0.82em;">— Mitigating hallucinations in LLMs via extrapolation of token probabilities</span></h3>
+          <p class="authors"><span class="me">Yunzhen He</span>, Yusuke Takase, Yoichi Ishibashi, Hidetoshi Shimodaira</p>
+          <p class="venue">Association for Natural Language Processing (ANLP) 2024<span class="badge award">Sponsor Award</span></p>
+        </div>
+        <div class="actions">
+          <a href="#">paper</a>
+          <a href="#">bib</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="block" id="education" data-screen-label="Education">
+  <div class="container">
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="row">
+        <div class="when">2025 — present</div>
+        <div class="what">
+          <p class="role">Ph.D., Informatics (Data Science)</p>
+          <p class="where">Kyoto University · Graduate School of Informatics</p>
+          <p class="note">Advisor: Hidetoshi Shimodaira. Expected completion <span class="accent">2028</span>. Supported by the DoGS Fellowship.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when">2023 — 2025</div>
+        <div class="what">
+          <p class="role">M.S., Informatics (Data Science)</p>
+          <p class="where">Kyoto University · Graduate School of Informatics</p>
+          <p class="note">Advisor: Hidetoshi Shimodaira.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when">2018 — 2022</div>
+        <div class="what">
+          <p class="role">B.E., Information and System Engineering</p>
+          <p class="where">Chuo University · Faculty of Science and Engineering</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="experience" data-screen-label="Experience">
+  <div class="container">
+    <h2>Experience</h2>
+    <div class="timeline">
+      <div class="row">
+        <div class="when">Apr 2024 — present</div>
+        <div class="what">
+          <p class="role">Research Assistant</p>
+          <p class="where">Graduate School of Informatics, Kyoto University</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when">Nov 2024 — Jan 2025</div>
+        <div class="what">
+          <p class="role">Part-time, AI Architecture</p>
+          <p class="where">Rakuten Group · AI &amp; Data Division</p>
+          <p class="note">AI for Business Department, AI Architecture Section.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when">Apr 2024 — Aug 2024</div>
+        <div class="what">
+          <p class="role">Intern, LLM Deep Learning Engineer</p>
+          <p class="where">Spiral AI · R&amp;D</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block awards" id="awards" data-screen-label="Awards">
+  <div class="container">
+    <h2>Awards &amp; honors</h2>
+    <div class="timeline">
+      <div class="row">
+        <div class="when">2025 — 2028</div>
+        <div class="what">
+          <p class="role">DoGS Fellow</p>
+          <p class="org">Division of Graduate Studies, Kyoto University</p>
+          <p class="note">Research stipend ¥250,000/month + ¥900,000/year research grant.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when">2024</div>
+        <div class="what">
+          <p class="role">Sponsor Award</p>
+          <p class="org">Association for Natural Language Processing (ANLP) 2024</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; max-width:var(--content-w);">
+    <span>© 2026 Yunzhen He</span>
+    <span>Kyoto · 京都</span>
+  </div>
+</footer>
+
+</body>
+</html>
