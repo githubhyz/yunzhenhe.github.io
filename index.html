@@ -76,7 +76,6 @@
   header.site .lede {
     margin: 28px 0 0;
     color: var(--fg);
-    max-width: 60ch;
     font-size: 17px;
     line-height: 1.6;
   }
@@ -120,8 +119,8 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
-    margin: 0 0 28px;
-    padding-bottom: 12px;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
     border-bottom: 1px solid var(--rule);
     display: flex;
     align-items: baseline;
@@ -136,7 +135,6 @@
   /* About */
   .about p {
     margin: 0 0 14px;
-    max-width: 62ch;
     color: var(--fg);
   }
   .about p.muted { color: var(--muted); }
@@ -169,7 +167,7 @@
     display: grid;
     grid-template-columns: 56px 1fr auto;
     gap: 20px;
-    padding: var(--row-pad) 0;
+    padding: 6px 0;
     border-bottom: 1px solid var(--rule);
     align-items: baseline;
   }
@@ -185,15 +183,15 @@
   .pub .title {
     font-weight: 500;
     color: var(--fg);
-    line-height: 1.4;
-    margin: 0 0 6px;
+    line-height: 1.35;
+    margin: 0 0 3px;
     font-size: 15.5px;
   }
   .pub .authors {
     color: var(--muted);
     font-size: 13.5px;
-    margin: 0 0 6px;
-    line-height: 1.5;
+    margin: 0 0 3px;
+    line-height: 1.45;
   }
   .pub .authors .me { color: var(--fg); font-weight: 500; border-bottom: 1px dotted var(--faint); }
   .pub .venue {
@@ -236,35 +234,40 @@
   }
   .pub .actions a:hover { color: var(--accent); }
 
-  /* Edu / Exp shared timeline */
   .timeline { display: flex; flex-direction: column; }
   .row {
     display: grid;
     grid-template-columns: 140px 1fr;
     gap: 24px;
-    padding: 14px 0;
+    padding: 6px 0;
     border-bottom: 1px solid var(--rule);
-    align-items: baseline;
+    align-items: first baseline;
+    line-height: 1.5;
   }
   .row:last-child { border-bottom: none; }
   .row .when {
     font-family: var(--font-mono);
     font-size: 12px;
     color: var(--muted);
-    padding-top: 3px;
+    line-height: 1.5;
   }
+  .row .what > *:first-child { margin-top: 0; }
   .row .what .role {
     font-weight: 500;
-    margin: 0 0 2px;
+    margin: 0 0 1px;
+    line-height: 1.5;
   }
   .row .what .where {
     color: var(--muted);
     font-size: 13.5px;
+    margin: 0;
+    line-height: 1.5;
   }
   .row .what .note {
     color: var(--muted);
     font-size: 13px;
-    margin-top: 4px;
+    margin-top: 2px;
+    line-height: 1.5;
   }
   .row .what .note .accent { color: var(--accent); }
 
@@ -272,6 +275,7 @@
   .awards .row .what .role { font-weight: 500; }
   .awards .row .what .org {
     color: var(--muted); font-size: 13px;
+    margin: 0;
   }
 
   /* Footer */
@@ -314,7 +318,7 @@
   }
 </style>
 </head>
-<body data-screen-label="01 Home">
+<body data-screen-label="01 Home" class="layout-wide">
 
 
 <header class="site">
